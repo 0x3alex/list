@@ -17,7 +17,6 @@ int main(void) {
     printf("%d\n",*by_index_vector_uint(v2,0));
     destroy_vector_uint(v);
 
-
     vector_char_ptr *c = new_vector_char_ptr("hello");
     throw_error_vector_char_ptr = 1;
     push_vector_char_ptr(c,"world");
