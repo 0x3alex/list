@@ -115,5 +115,8 @@
             } \
             i = i->ptr_next; \
         } \
+        if(filter_frees_old_vector_##suffix) { \
+            destroy_vector_##suffix(v); \
+        } \
         return n; \
     } \
