@@ -72,6 +72,14 @@
         i->ptr_next = NULL; \
     } \
 \
+    void print_vector_##suffix(vector_##suffix *v, char* formatter) { \
+        vector_##suffix *i = v; \
+        while(i != NULL) { \
+            printf(formatter,v->m_value); \
+            i = i->ptr_next; \
+        } \
+    } \
+\
     type *by_index_vector_##suffix(vector_##suffix *v, int index) { \
         if(index < 0) { \
             puts("Error in by_index_...: Index is less then 0"); \

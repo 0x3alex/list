@@ -11,10 +11,9 @@ int main(void) {
     vector_uint *v = new_vector_uint(1);
     push_vector_uint(v,2);
     map_over_vector_uint(v, &timesTwo);
-    printf("%d\n",*last_item_vector_uint(v));
+    print_vector_uint(v,"%d\n");
 
     vector_uint *v2 = filter_over_vector_uint(v,&is4);
-    printf("%d\n",*by_index_vector_uint(v2,0));
     destroy_vector_uint(v2);
 
     vector_char_ptr *c = new_vector_char_ptr("hello");
