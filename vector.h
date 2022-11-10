@@ -40,6 +40,7 @@
         Destructor
     */ \
     void destroy_vector_##suffix(vector_##suffix *v) { \
+        if(v == NULL) return; \
         vector_##suffix *i = v, *t = NULL; \
         while(i->ptr_next != NULL) i = i->ptr_next; \
         while(i != NULL) { \
@@ -75,12 +76,12 @@
     void print_vector_##suffix(vector_##suffix *v, char* formatter) { \
         vector_##suffix *i = v; \
         while(i != NULL) { \
-            printf(formatter,v->m_value); \
+            printf(formatter,i->m_value); \
             i = i->ptr_next; \
         } \
     } \
 \
-    type *by_index_vector_##suffix(vector_##suffix *v, int index) { \
+    vector_##suffix *by_index_vector_##suffix(vector_##suffix *v, int index) { \
         if(index < 0) { \
             puts("Error in by_index_...: Index is less then 0"); \
             exit(-1); \
@@ -92,15 +93,12 @@
             if(i == index) break; \
             vi = vi->ptr_next; \
         } \
-        if(i == index && vi != NULL) return &(vi->m_value); \
+        if(i == index && vi != NULL) return vi; \
         if(throw_error_vector_##suffix) { \
             puts("Error in by_index_...: Index out of bounds!"); \
             exit(-1); \
         } \
         return NULL; \
-    } \
-\
-    void set_at_index_vector_##suffix(vector_##suffix *v, int index, type val) { \
     } \
 \
     void map_over_vector_##suffix(vector_##suffix *v, type(*f)(type)) { \
