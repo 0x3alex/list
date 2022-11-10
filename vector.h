@@ -40,11 +40,12 @@
         Destructor
     */ \
     void destroy_vector_##suffix(vector_##suffix *v) { \
-        vector_##suffix *i = v; \
+        vector_##suffix *i = v, *t = NULL; \
         while(i->ptr_next != NULL) i = i->ptr_next; \
         while(i != NULL) { \
+            t = i->ptr_prev; \
             free(i); \
-            i = i->ptr_prev; \
+            i = t; \
         } \
     } \
 \
