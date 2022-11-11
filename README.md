@@ -1,6 +1,6 @@
-# vector.h
+# vector
 
-vector.h is a single header **without** external dependencies, giving you the possibility to create dynamic vectors for every data type or struct you want :D
+vector is a single header **without** external dependencies, giving you the possibility to create dynamic vectors for every data type or struct you want :D
 
 It is written in macros and is pretty straight forward to use!
 
