@@ -16,6 +16,7 @@
     */ \
     bool throw_error_vector_##suffix = true; \
     bool filter_frees_old_vector_##suffix = true; \
+    bool print_with_ptr_vector_##suffix = false; \
     /*
         Create struct for the type 
     */ \
@@ -77,6 +78,9 @@
         vector_##suffix *i = v; \
         while(i != NULL) { \
             printf(formatter,i->m_value); \
+            if(print_with_ptr_vector_##suffix)  { \
+                printf("v %p\nn %p\np %p\n",i,i->ptr_next,i->ptr_prev); \
+            } \
             i = i->ptr_next; \
         } \
     } \
@@ -99,6 +103,19 @@
             exit(-1); \
         } \
         return NULL; \
+    } \
+\
+    void insert_after_vector_##suffix(vector_##suffix *v, type val) { \
+        if(v == NULL) return; \
+        vector_##suffix *n = v->ptr_next; \
+        v->ptr_next = (vector_##suffix*)calloc(1,sizeof(vector_##suffix)); \
+        assert(v->ptr_next != NULL); \
+        v->ptr_next->ptr_next = n; \
+        if(n != NULL) { \
+            n->ptr_prev = v->ptr_next; \
+        } \
+        v->ptr_next->m_value = val; \
+        v->ptr_next->ptr_prev = v; \
     } \
 \
     void map_over_vector_##suffix(vector_##suffix *v, type(*f)(type)) { \

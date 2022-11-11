@@ -9,18 +9,22 @@ bool is4(int i) {return i == 4;}
 
 int main(void) {
     vector_uint *v = new_vector_uint(1);
+    print_with_ptr_vector_uint = true;
     push_vector_uint(v,2);
-    map_over_vector_uint(v, &timesTwo);
-    by_index_vector_uint(v,0)->m_value = 1337;
+    push_vector_uint(v,3);
+    push_vector_uint(v,4);
+    insert_after_vector_uint(by_index_vector_uint(v,1),1337);
+    // map_over_vector_uint(v, &timesTwo);
+    // by_index_vector_uint(v,0)->m_value = 1337;
     print_vector_uint(v,"%d\n");
 
-    vector_uint *v2 = filter_over_vector_uint(v,&is4);
+    vector_uint *v2 = filter_over_vector_uint(v,&is4);  //v is freed here if not configured
+                                                        //otherwise
     map_over_vector_uint(v2, &timesTwo);
-    print_vector_uint(v2,"%d\n");
+    //print_vector_uint(v2,"%d\n");
     destroy_vector_uint(v2);
 
     vector_char_ptr *c = new_vector_char_ptr("hello");
-    throw_error_vector_char_ptr = 1;
     push_vector_char_ptr(c,"world");
     printf("%s\n",by_index_vector_char_ptr(c,1)->m_value);
     pop_vector_char_ptr(c);
