@@ -12,7 +12,7 @@ int main(void) {
     //print_with_ptr_vector_uint = true; //config option
     insert_after_vector_uint(by_index_vector_uint(v,1),1337);
     // map_over_vector_uint(v, &timesTwo);
-    // by_index_vector_uint(v,0)->m_value = 1337;
+    by_index_vector_uint(v,0)->m_value = 69;
     print_vector_uint(v,"%d\n");
 
     vector_uint *v2 = filter_over_vector_uint(v,&is4);  //v is freed here if not configured

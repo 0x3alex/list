@@ -82,10 +82,10 @@
         } \
     } \
 \
-    type *last_item_vector_##suffix(vector_##suffix *v) { \
+    vector_##suffix *last_item_vector_##suffix(vector_##suffix *v) { \
         vector_##suffix *i = v; \
         while(i->ptr_next != NULL) i = i->ptr_next; \
-        return &(i->m_value); \
+        return i; \
     } \
 \
     void push_vector_##suffix(vector_##suffix *v,type val) { \
