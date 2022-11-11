@@ -5,7 +5,7 @@ vector is a single header **without** external dependencies, giving you the poss
 It is written in macros and is pretty straight forward to use!
 
 ## Vector Config Paramters
-
+``##suffix`` is going to be replaced by the data type, which the vector holds
 ```C++
     bool throw_error_vector_##suffix = true; //if errors shall be thrown
     bool filter_frees_old_vector_##suffix = true; //if old vectors, when returning new vectors, shall be freed
