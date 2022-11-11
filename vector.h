@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
+#include <stdarg.h>
 
 /*
     @params
@@ -28,12 +29,35 @@
     /*
         Construtor
     */ \
-    vector_##suffix *new_vector_##suffix(type v) { \
+    vector_##suffix *new_vector_##suffix(int amount_of_values,...) { \
         vector_##suffix *n = (vector_##suffix*) calloc(1,sizeof(vector_##suffix)); \
         assert(n != NULL); \
-        n->m_value = v; \
-        n->ptr_next = NULL; \
-        n->ptr_prev = NULL; \
+        va_list argp; \
+        va_start(argp, amount_of_values); \
+        if(amount_of_values == 1) { \
+            n->m_value = va_arg(argp, type); \
+            n->ptr_next = NULL; \
+            n->ptr_prev = NULL; \
+            return n; \
+        } \
+        if(amount_of_values > 1) { \
+            vector_##suffix *p = NULL; \
+            for(int i = 0; i < amount_of_values; i++) { \
+                if(i == 0) { \
+                    n->m_value = va_arg(argp, type); \
+                    n->ptr_next = NULL; \
+                    n->ptr_prev = NULL; \
+                    p = n; \
+                    continue; \
+                } \
+                vector_##suffix *t = (vector_##suffix*)calloc(1,sizeof(vector_##suffix)); \
+                t->m_value = va_arg(argp, type); \
+                p->ptr_next = t;  \
+                t->ptr_prev = p; \
+                t->ptr_next = NULL; \
+                p = t; \
+            } \
+        } \
         return n; \
     } \
 \
@@ -132,7 +156,7 @@
         while(i != NULL) { \
             if((*f)(i->m_value)) { \
                 if(n == NULL) { \
-                    n = new_vector_##suffix(i->m_value); \
+                    n = new_vector_##suffix(1,i->m_value); \
                 }else{ \
                     push_vector_##suffix(n,i->m_value); \
                 } \
