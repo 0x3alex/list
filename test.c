@@ -1,6 +1,7 @@
 #include "vector.h"
 #include <stdio.h>
 
+//needs to be done OUTSIDE a function
 define_vector(uint,int); 
 define_vector(char_ptr, char*);
 
