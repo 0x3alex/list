@@ -30,18 +30,25 @@
         Construtor
     */ \
     vector_##suffix *new_vector_##suffix(int amount_of_values,...) { \
+        if(amount_of_values < 1) return NULL; /*There is nothing todo here*/ \
         vector_##suffix *n = (vector_##suffix*) calloc(1,sizeof(vector_##suffix)); \
         assert(n != NULL); \
         va_list argp; \
         va_start(argp, amount_of_values); \
+        /*
+            If its just one value, init it like in the first iteration of the constructor
+        */ \
         if(amount_of_values == 1) { \
             n->m_value = va_arg(argp, type); \
             n->ptr_next = NULL; \
             n->ptr_prev = NULL; \
             return n; \
         } \
+        /*
+            If its more than one, iterate
+        */ \
         if(amount_of_values > 1) { \
-            vector_##suffix *p = NULL; \
+            vector_##suffix *p = NULL,*t = NULL; \
             for(int i = 0; i < amount_of_values; i++) { \
                 if(i == 0) { \
                     n->m_value = va_arg(argp, type); \
@@ -50,7 +57,7 @@
                     p = n; \
                     continue; \
                 } \
-                vector_##suffix *t = (vector_##suffix*)calloc(1,sizeof(vector_##suffix)); \
+                t = (vector_##suffix*)calloc(1,sizeof(vector_##suffix)); \
                 t->m_value = va_arg(argp, type); \
                 p->ptr_next = t;  \
                 t->ptr_prev = p; \
