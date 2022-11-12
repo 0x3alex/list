@@ -42,6 +42,7 @@
             n->m_value = va_arg(argp, type); \
             n->ptr_next = NULL; \
             n->ptr_prev = NULL; \
+            va_end(argp); \
             return n; \
         } \
         /*
@@ -58,6 +59,7 @@
                     continue; \
                 } \
                 t = (vector_##suffix*)calloc(1,sizeof(vector_##suffix)); \
+                assert(t != NULL); \
                 t->m_value = va_arg(argp, type); \
                 p->ptr_next = t;  \
                 t->ptr_prev = p; \
@@ -65,6 +67,7 @@
                 p = t; \
             } \
         } \
+        va_end(argp); \
         return n; \
     } \
 \
