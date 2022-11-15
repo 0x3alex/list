@@ -29,7 +29,7 @@
     /*
         Construtor
     */ \
-    vector_##suffix *new_vector_##suffix(int amount_of_values,...) { \
+    vector_##suffix *new_vector_##suffix(const unsigned int amount_of_values,...) { \
         if(amount_of_values < 1) return NULL; /*There is nothing todo here*/ \
         vector_##suffix *n = (vector_##suffix*) calloc(1,sizeof(vector_##suffix)); \
         assert(n != NULL); \
@@ -119,7 +119,7 @@
         } \
     } \
 \
-    vector_##suffix *by_index_vector_##suffix(vector_##suffix *v, int index) { \
+    vector_##suffix *by_index_vector_##suffix(vector_##suffix *v, const unsigned int index) { \
         if(index < 0) { \
             puts("Error in by_index_...: Index is less then 0"); \
             exit(-1); \
