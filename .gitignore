@@ -1,3 +1,5 @@
 .gitattributes
 .vscode/settings.json
 a.out
+Makefile
+test.out
