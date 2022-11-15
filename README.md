@@ -4,6 +4,12 @@ vector is a single header **without** external dependencies, giving you the poss
 
 It is written in macros and is pretty straight forward to use!
 
+The pointer, which is set, when calling 
+```c
+new_vector_...
+```
+will always be the head of the vector,  except when set to another address manually
+
 ## Vector Config Paramters
 ``##suffix`` is going to be replaced by the data type, which the vector holds
 ```C++
