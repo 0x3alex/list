@@ -29,7 +29,7 @@
     /*
         Construtor
     */ \
-    vector_##suffix *new_vector_##suffix(const unsigned int amount_of_values,...) { \
+    static vector_##suffix *new_vector_##suffix(const unsigned int amount_of_values,...) { \
         if(amount_of_values < 1) return NULL; /*There is nothing todo here*/ \
         vector_##suffix *n = (vector_##suffix*) calloc(1,sizeof(vector_##suffix)); \
         assert(n != NULL); \
@@ -74,7 +74,7 @@
     /*
         Destructor
     */ \
-    void destroy_vector_##suffix(vector_##suffix *v) { \
+    static void destroy_vector_##suffix(vector_##suffix *v) { \
         if(v == NULL) return; \
         vector_##suffix *i = v, *t = NULL; \
         while(i->ptr_next != NULL) i = i->ptr_next; \
@@ -85,13 +85,13 @@
         } \
     } \
 \
-    vector_##suffix *last_item_vector_##suffix(vector_##suffix *v) { \
+    static vector_##suffix *last_item_vector_##suffix(vector_##suffix *v) { \
         vector_##suffix *i = v; \
         while(i->ptr_next != NULL) i = i->ptr_next; \
         return i; \
     } \
 \
-    void push_vector_##suffix(vector_##suffix *v,type val) { \
+    static void push_vector_##suffix(vector_##suffix *v,type val) { \
         vector_##suffix *i = v; \
         while(i->ptr_next != NULL) i = i->ptr_next; \
         i->ptr_next = (vector_##suffix*)calloc(1,sizeof(vector_##suffix)); \
@@ -101,14 +101,14 @@
         i->ptr_next->ptr_next = NULL; \
     } \
 \
-    void pop_vector_##suffix(vector_##suffix *v) { \
+    static void pop_vector_##suffix(vector_##suffix *v) { \
         vector_##suffix *i = v; \
         while(i->ptr_next->ptr_next != NULL) i = i->ptr_next; \
         free(i->ptr_next); \
         i->ptr_next = NULL; \
     } \
 \
-    void print_vector_##suffix(vector_##suffix *v, char* formatter) { \
+    static void print_vector_##suffix(vector_##suffix *v, char* formatter) { \
         vector_##suffix *i = v; \
         while(i != NULL) { \
             printf(formatter,i->m_value); \
@@ -119,7 +119,7 @@
         } \
     } \
 \
-    vector_##suffix *by_index_vector_##suffix(vector_##suffix *v, const unsigned int index) { \
+    static vector_##suffix *by_index_vector_##suffix(vector_##suffix *v, const unsigned int index) { \
         if(index < 0) { \
             puts("Error in by_index_...: Index is less then 0"); \
             exit(-1); \
@@ -139,7 +139,7 @@
         return NULL; \
     } \
 \
-    void insert_after_vector_##suffix(vector_##suffix *v, type val) { \
+    static void insert_after_vector_##suffix(vector_##suffix *v, type val) { \
         if(v == NULL) return; \
         vector_##suffix *n = v->ptr_next; \
         v->ptr_next = (vector_##suffix*)calloc(1,sizeof(vector_##suffix)); \
@@ -152,7 +152,7 @@
         v->ptr_next->ptr_prev = v; \
     } \
 \
-    void map_over_vector_##suffix(vector_##suffix *v, type(*f)(type)) { \
+    static void map_over_vector_##suffix(vector_##suffix *v, type(*f)(type)) { \
         vector_##suffix *i = v; \
         while(i != NULL) { \
             i->m_value = (*f)(i->m_value); \
@@ -160,7 +160,7 @@
         } \
     } \
 \
-    vector_##suffix *filter_over_vector_##suffix(vector_##suffix *v, bool(*f)(type)) { \
+    static vector_##suffix *filter_over_vector_##suffix(vector_##suffix *v, bool(*f)(type)) { \
         vector_##suffix *n = NULL; \
         vector_##suffix *i = v; \
         while(i != NULL) { \
