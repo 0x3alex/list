@@ -15,9 +15,9 @@
     /*
         Config paramters for each vector type
     */ \
-    bool throw_error_vector_##suffix = true; \
-    bool filter_frees_old_vector_##suffix = true; \
-    bool print_with_ptr_vector_##suffix = false; \
+    static bool throw_error_vector_##suffix = true; \
+    static bool filter_frees_old_vector_##suffix = true; \
+    static bool print_with_ptr_vector_##suffix = false; \
     /*
         Create struct for the type 
     */ \
